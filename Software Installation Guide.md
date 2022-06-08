@@ -5,6 +5,7 @@
 - [Nvidia Driver](#nvidia-driver)
 - [Google Chrome](#google-chrome)
 - [Git](#git)
+- [Github CLI](#github-cli)
 - [VLC Media Player](#vlc-media-player)
 - [H264 Decoder](#h264-decoder)
 - [Visual Studio Code](#visual-studio-code)
@@ -60,6 +61,17 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt update
 sudo add-apt-repository ppa:git-core/ppa
 sudo apt install git
+```
+
+## Github CLI
+
+```sh
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+
+sudo apt update
+sudo apt install gh
 ```
 
 ## VLC media player
