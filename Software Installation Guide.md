@@ -10,6 +10,7 @@
 - [H264 Decoder](#h264-decoder)
 - [Visual Studio Code](#visual-studio-code)
 - [NodeJS](#nodejs)
+- [MongoDB Community Edition](#mongodb-community-edition)
 - [Docker](#docker)
 - [Anaconda](#anaconda)
 - [KVM](#kvm)
@@ -163,6 +164,75 @@ Now add these lines to your `~/.bashrc` or `~/.zshrc` or `~/.profile`
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+
+## MongoDB Community Edition
+
+### Import the public key used by the package management system:
+
+```bash
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+
+# This operation should respond with an OK.
+# if you receive an error indicating that 'gnupg' in not installed, then -
+sudo apt-get install gnupg
+# once installed, retry importing the key
+```
+
+### Create a list file for MongoDB:
+
+```bash
+# create the '/etc/apt/sources.list.d/mongodb-org-5.0.list' file
+echo "deb [arch=amd64,arm64] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+```
+
+### Install MongoDB packages:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+```
+
+### Start MongoDB:
+
+```bash
+sudo systemctl start mongod
+# if you receive an error - 'Failed to start mongod.service: Unit mongod.service not found' run the following command
+sudo systemctl daemon-reload
+# then try starting 'mongod' again
+```
+
+### Enable MongoDB on startup:
+
+```bash
+# check mongodb status
+sudo systemctl status mongod
+# enable mongodb server on startup
+sudo systemctl enable mongod
+# disable mongodb server on startup
+sudo systemctl disable mongob
+# stop mongodb server
+sudo systemctl stop mongod
+# restart mongodb server
+sudo systemctl restart mongod
+```
+
+### Use MongoDB Shell
+
+```bash
+mongosh
+```
+
+### Uninstall MongoDB Community Edition:
+
+```bash
+# stop mongod process
+sudo systemctl stop mongod
+# remove packages
+sudo apt-get purge mongodb-org*
+# remove data directories
+sudo rm -r /var/log/mongodb
+sudo rm -r /var/lib/mongodb
 ```
 
 ## Docker
