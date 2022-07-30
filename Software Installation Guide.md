@@ -240,7 +240,7 @@ sudo rm -r /var/lib/mongodb
 Remove previous installations:
 
 ```sh
-sudo apt remove docker docker.io docker-engine containerd runc
+sudo apt-get remove docker docker.io docker-engine containerd runc
 ```
 
 ### Install using docker repository
@@ -250,20 +250,21 @@ sudo apt remove docker docker.io docker-engine containerd runc
 1. Update the `apt` package index and install packages to allow `apt` to use a repository over HTTPS:
 
 ```sh
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg lsb-release
 ```
 
 2. Add Docker's official GPG key:
 
 ```sh
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/ap/keyrings/docker.gpg
 ```
 
 3. Setup the `stable` repository
 
 ```sh
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 #### Install Docker Engine
@@ -271,8 +272,8 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] 
 1. Update the `apt` package index, and install the latest version of Docker Engine and containerd
 
 ```sh
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io
+sudo apt-get update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 2. Verify that Docker Engine is isntalled correctly by running the `hello-world` image
@@ -296,26 +297,6 @@ sudo dpkg -i package.deb
 sudo docker run hello-world
 ```
 
-### Install Docker Compose on linux
-
-1. Run this command to download the current stable release of Docker Compose:
-
-```sh
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-```
-
-2. Apply executable permissions to the binary:
-
-```sh
-sudo chmod +x /usr/local/bin/docker-compose
-```
-
-3. Test the installation
-
-```sh
-docker-compose --version
-```
-
 ### Use docker without `sudo` command
 
 1. Run the following commands:
@@ -324,6 +305,8 @@ docker-compose --version
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
+
+2. Logout and log back in so that your group membership is re-eveluated
 
 ### Fix `dns` issue in ubuntu
 
@@ -334,7 +317,26 @@ cat /etc/resolv.conf
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
 
-2. Logout and log back in so that your group membership is re-eveluated
+### Docker Desktop
+
+1. Download `.deb` for **docker-desktop** from [docker](https://www.docker.com/products/docker-desktop/)
+2. After download finishes, install
+
+```sh
+# "cd" into download directory
+sudo apt-get install ./docker-desktop*.deb
+```
+
+3. Setup `pass` (only for linux systems)
+
+```sh
+gpg --generate-key
+# then enter your information
+
+pass init <hash> # this hash is generated in the previous step (under pub)
+```
+
+3. Run `Docker Desktop` from menu
 
 ## Anaconda
 
