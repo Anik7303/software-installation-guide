@@ -19,7 +19,9 @@
 - [JAVA](#java)
 - [Android Studio](#android-studio)
 - [Qbittorrent](#qbittorrent)
-- [youtube-dl](#youtube-dl)
+- [yt-dlp](#yt-dlp)
+- [youtube-dl](#youtube-dl-deprecated)
+- [mkcert](#mkcert)
 - [uGet Download Manager](#uget-download-manager)
 - [uGet-integrator](#uget-integrator)
 - [XDM - Xtreme Download Manager](#xdm-xtreme-download-manager)
@@ -589,10 +591,44 @@ sudo apt update
 sudo apt install qbittorrent
 ```
 
-## youtube-dl
+## yt-dlp
+
+```sh
+# required python
+python -m pip install --upgrade yt-dlp
+# or using apt
+sudo apt install yt-dlp
+```
+
+## youtube-dl [deprecated]
 
 ```sh
 sudo apt install youtube-dl
+```
+
+## mkcert
+
+### first install `certutil`
+
+```bash
+sudo apt install libnss3-tools
+```
+
+### build from source (requires Go 1.13+)
+
+```bash
+git clone https://github.com/FiloSottile/mkcert && cd mkcert
+go build -ldflags "-X main.Version=$(git describe --tags)"
+```
+
+or
+
+### use pre-built binaries
+
+```bash
+curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+chmod +x mkcert-v*-linux-amd64
+sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
 ```
 
 ## uGet Download Manager
