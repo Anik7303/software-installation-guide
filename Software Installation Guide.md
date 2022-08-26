@@ -11,6 +11,7 @@
 - [Visual Studio Code](#visual-studio-code)
 - [NodeJS](#nodejs)
 - [MongoDB Community Edition](#mongodb-community-edition)
+- [Redis](#redis)
 - [Docker](#docker)
 - [Anaconda](#anaconda)
 - [KVM](#kvm)
@@ -235,6 +236,29 @@ sudo apt-get purge mongodb-org*
 # remove data directories
 sudo rm -r /var/log/mongodb
 sudo rm -r /var/lib/mongodb
+```
+
+## Redis
+
+- Prerequisites
+
+```bash
+# if you're running a very minimal distribution (such as a Docker container)
+sudo apt install lsb-release
+```
+
+- Add the repository to `apt` index
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+```
+
+- Install `redis`
+
+```bash
+sudo apt update
+sudo apt install redis
 ```
 
 ## Docker
