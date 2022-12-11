@@ -19,6 +19,7 @@
 - [Deluge](#deluge)
 - [JAVA](#java)
 - [Android Studio](#android-studio)
+- [PHP (for laravel)](#php)
 - [Qbittorrent](#qbittorrent)
 - [yt-dlp](#yt-dlp)
 - [youtube-dl](#youtube-dl-deprecated)
@@ -605,6 +606,86 @@ sudo apt install android-studio
 
 ```sh
 sudo snap install android-studio --classic
+```
+
+### PHP
+
+```sh
+sudo apt update
+sudo apt upgrade -y
+```
+
+#### Add repository
+
+```sh
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+```
+
+```sh
+sudo apt install php php-common php-dev php-curl php-json php-readline php-fpm php-cli php-xml php-zip php-mbstring php-gd php-mysql php-pear -y
+```
+
+#### Install Apache with PHP-FPM
+
+```sh
+sudo apt install apache2 php8.1-fpm libapache2-mod-fcgid
+```
+
+By default `php-fpm` is not enabled in `Apache`. To enable it run -
+
+```sh
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php8.1-fpm
+sudo systemctl reload apache2
+
+```
+
+#### Install Composer
+
+```sh
+sudo apt update
+sudo apt install curl -y
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+sudo chmod +x /usr/local/bin/composer
+
+# verify installation
+composer --version
+```
+
+#### Install Build Tools
+
+```sh
+sudo apt install gcc make autoconf libc-dev pkg-config -y
+```
+
+#### Install MCrypt Dev
+
+```sh
+sudo apt install libmcrypt-dev -y
+```
+
+#### Install MCrypt
+
+```sh
+sudo pecl install mcrypt-1.0.3
+
+# Press enter on command promt to complete installation
+# libmcrypt prefix? [autodetect] :
+```
+
+#### Configure PHP
+
+```sh
+sudo bash -c "echo extension=/usr/lib/php/20190902/mcrypt.so > /etc/php/7.4/cli/conf.d/mcrypt.ini"
+sudo bash -c "echo extension=/usr/lib/php/20190902/mcrypt.so > /etc/php/7.4/apache2/conf.d/mcrypt.ini"
+
+# verify MCrypt
+php -i | grep mcrypt
+
+# enable mcrypt
+sudo phpenmod mcrypt
 ```
 
 ## Qbittorrent
