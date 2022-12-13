@@ -35,21 +35,28 @@ STATUS;
 
 # show mysql version
 SHOW VARIABLES LIKE %version%;
+SHOW VARIABLES LIKE 'validate_password%';
+
+# change password policy settings
+SET GLOBAL validate_password.policy = "LOW";
+SET GLOBAL validate_password.length = 8;
+SET GLOBAL validate_password.number_count = 0;
+SET GLOBAL validate_password.special_char_count = 0;
 
 # create a user
 CREATE USER 'USERNAME'@'HOST' IDENTIFIED BY 'PASSWORD';
 
 # create database
-CREATE `DATABASE_NAME`;
+CREATE DATABASE `DATABASE_NAME`;
 
 # grant priviledges
-GRANT ALL PRIVILEDGES ON DATABASE_NAME.TABLE_NAMES TO 'USERNAME'@'HOST';
+GRANT ALL PRIVILEGES ON DATABASE_NAME.TABLE_NAMES TO 'USERNAME'@'HOST';
 
 # or grant certain priviledges (CREATE, ALTER, DROP, SELECT, INSERT, UPDATE, DELETE, REFERENCES)
 GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON DATABASE_NAME.TABLE_NAME TO 'USERNAME'@'HOST';
 
-# flush priviledges
-FLUSH PRIVILEDGES;
+# flush privileges
+FLUSH PRIVILEGES;
 
 # show granted priviledges
 SHOW GRANTS FOR 'USERNAME'@'HOST';
@@ -63,4 +70,10 @@ exit;
 ```bash
 sudo apt update
 sudo apt install libmysqlclient-dev
+```
+
+## Essential mysql plugin for PHP:
+
+```bash
+sudo apt install php-mysql
 ```
