@@ -2,32 +2,33 @@
 
 ## Contents
 
-- [Nvidia Driver](#nvidia-driver)
-- [Google Chrome](#google-chrome)
-- [Git](#git)
-- [Github CLI](#github-cli)
-- [VLC Media Player](#vlc-media-player)
-- [H264 Decoder](#h264-decoder)
-- [Visual Studio Code](#visual-studio-code)
-- [NodeJS](#nodejs)
-- [MongoDB Community Edition](#mongodb-community-edition)
-- [Redis](#redis)
-- [Docker](#docker)
-- [Anaconda](#anaconda)
-- [KVM](#kvm)
-- [ZSH Shell](#zsh-shell)
-- [Deluge](#deluge)
-- [JAVA](#java)
-- [Android Studio](#android-studio)
-- [PHP (for laravel)](#php)
-- [Qbittorrent](#qbittorrent)
-- [yt-dlp](#yt-dlp)
-- [youtube-dl](#youtube-dl-deprecated)
-- [mkcert](#mkcert)
-- [uGet Download Manager](#uget-download-manager)
-- [uGet-integrator](#uget-integrator)
-- [XDM - Xtreme Download Manager](#xdm-xtreme-download-manager)
-- [Ohter Softwares](#other-softwares-download-from-website)
+-   [Nvidia Driver](#nvidia-driver)
+-   [Google Chrome](#google-chrome)
+-   [Git](#git)
+-   [Github CLI](#github-cli)
+-   [VLC Media Player](#vlc-media-player)
+-   [H264 Decoder](#h264-decoder)
+-   [Visual Studio Code](#visual-studio-code)
+-   [NodeJS](#nodejs)
+-   [MongoDB Community Edition](#mongodb-community-edition)
+-   [Redis](#redis)
+-   [Docker (for linux)](#docker-for-linux)
+-   [Docker (for windows)](#docker-for-windows)
+-   [Anaconda](#anaconda)
+-   [KVM](#kvm)
+-   [ZSH Shell](#zsh-shell)
+-   [Deluge](#deluge)
+-   [JAVA](#java)
+-   [Android Studio](#android-studio)
+-   [PHP (for laravel)](#php)
+-   [Qbittorrent](#qbittorrent)
+-   [yt-dlp](#yt-dlp)
+-   [youtube-dl](#youtube-dl-deprecated)
+-   [mkcert](#mkcert)
+-   [uGet Download Manager](#uget-download-manager)
+-   [uGet-integrator](#uget-integrator)
+-   [XDM - Xtreme Download Manager](#xdm-xtreme-download-manager)
+-   [Ohter Softwares](#other-softwares-download-from-website)
 
 ## Nvidia Driver
 
@@ -241,28 +242,28 @@ sudo rm -r /var/lib/mongodb
 
 ## Redis
 
-- Prerequisites
+-   Prerequisites
 
 ```bash
 # if you're running a very minimal distribution (such as a Docker container)
 sudo apt install lsb-release
 ```
 
-- Add the repository to `apt` index
+-   Add the repository to `apt` index
 
 ```bash
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
 ```
 
-- Install `redis`
+-   Install `redis`
 
 ```bash
 sudo apt update
 sudo apt install redis
 ```
 
-## Docker
+## Docker (for linux)
 
 Remove previous installations:
 
@@ -365,6 +366,24 @@ pass init <hash> # this hash is generated in the previous step (under pub)
 
 3. Run `Docker Desktop` from menu
 
+## Docker (for windows)
+
+1. Open powershell and run the following command
+
+```bash
+wsl --install
+```
+
+2. Re-start PC
+3. Provide username and password for default linux environment in the terminal
+4. Download `Docker for Desktop` installer from docker website
+5. Install `Docker for Desktop`
+6. Check docker installation by running the following command
+
+```bash
+docker --version
+```
+
 ## Anaconda
 
 ### Anaconda Navigator
@@ -440,13 +459,13 @@ rm -rf ~/anaconda3 ~/.conda ~/.condarc ~/.continuum
 
 ### Prerequisites:
 
-- check CPU support for hardware virtualization
+-   check CPU support for hardware virtualization
 
 ```sh
 grep -Eoc '(vmx|svm)' /proc/cpuinfo
 ```
 
-- check if `VT` is enabled in `BIOS` using `kvm-ok` included in `cpu-checker`
+-   check if `VT` is enabled in `BIOS` using `kvm-ok` included in `cpu-checker`
 
 ```sh
 sudo apt update
@@ -460,12 +479,12 @@ kvm-ok
 sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager
 ```
 
-- `qemu-kvm` - software that provides hardware emulation for the KVM hypervisor
-- `libvirt-daemon-system` - configuration files to run the libvirt daemon as a system service
-- `libvirt-clients` - software for managing virtualization platforms
-- `bridge-utils` - a set of command-line tools for configuring ethernet bridges
-- `virtinst` - a set of command-line tools for creating virtual machines
-- `virt-manager` - aan easy-to-use GUI interface and supporting command-line utilities for managing virtual machines through libvirt
+-   `qemu-kvm` - software that provides hardware emulation for the KVM hypervisor
+-   `libvirt-daemon-system` - configuration files to run the libvirt daemon as a system service
+-   `libvirt-clients` - software for managing virtualization platforms
+-   `bridge-utils` - a set of command-line tools for configuring ethernet bridges
+-   `virtinst` - a set of command-line tools for creating virtual machines
+-   `virt-manager` - aan easy-to-use GUI interface and supporting command-line utilities for managing virtual machines through libvirt
 
 **Verify libvirt startup:**
 
