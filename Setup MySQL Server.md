@@ -34,7 +34,7 @@ USE `DATABASE_NAME`;
 STATUS;
 
 # show mysql version
-SHOW VARIABLES LIKE %version%;
+SHOW VARIABLES LIKE '%version%';
 SHOW VARIABLES LIKE 'validate_password%';
 
 # change password policy settings
@@ -42,6 +42,9 @@ SET GLOBAL validate_password.policy = "LOW";
 SET GLOBAL validate_password.length = 8;
 SET GLOBAL validate_password.number_count = 0;
 SET GLOBAL validate_password.special_char_count = 0;
+
+# show all users
+SELECT USER, HOST FROM mysql.user;
 
 # create a user
 CREATE USER 'USERNAME'@'HOST' IDENTIFIED BY 'PASSWORD';
@@ -60,6 +63,10 @@ FLUSH PRIVILEGES;
 
 # show granted priviledges
 SHOW GRANTS FOR 'USERNAME'@'HOST';
+
+# delete user
+DROP USER 'USERNAME'@'HOST';
+DROP USER IF EXISTS 'USERNAME'@'HOST';
 
 # exit repl
 exit;
